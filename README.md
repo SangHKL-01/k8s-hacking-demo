@@ -4,7 +4,7 @@
 > **Học viện:** Học viện Kỹ thuật Mật mã (KMA)
 
 ## 📖 Giới thiệu
-Repository này chứa các tệp cấu hình (Manifest YAML) được sử dụng để xây dựng môi trường thực nghiệm (Lab) cho đồ án tốt nghiệp. Mục tiêu của Lab là mô phỏng một kịch bản tấn công thực tế vào cụm Kubernetes (K8s) xuất phát từ một Pod bị xâm nhập, sau đó thực hiện leo thang đặc quyền và chiếm quyền kiểm soát Node.
+Repository này chứa các tệp cấu hình (Manifest YAML) được sử dụng để xây dựng môi trường thực nghiệm (Lab). Mục tiêu của Lab là mô phỏng một kịch bản tấn công thực tế vào cụm Kubernetes (K8s) xuất phát từ một Pod bị xâm nhập, sau đó thực hiện leo thang đặc quyền và chiếm quyền kiểm soát Node.
 
 ### Cấu trúc mô phỏng:
 * **Gateway:** Ứng dụng Spring Cloud Gateway (Mô phỏng lỗ hổng RCE).
