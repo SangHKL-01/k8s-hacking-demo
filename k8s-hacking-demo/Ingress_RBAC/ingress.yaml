@@ -1,0 +1,20 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gateway-ingress
+  namespace: k8s-hacking
+  resourceVersion: '241164'
+  uid: c16664ed-85f5-4054-825c-195679fc4cc0
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: kma.prestashop.vn
+      http:
+        paths:
+          - backend:
+              service:
+                name: spring-gateway
+                port:
+                  number: 8080
+            path: /
+            pathType: Prefix

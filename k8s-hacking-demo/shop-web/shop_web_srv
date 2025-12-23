@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: shop-web
+  namespace: k8s-hacking
+  resourceVersion: '193039'
+  uid: a31bd105-e304-4f63-9612-212d93b4807a
+spec:
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+    - name: tcp
+      port: 8080
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: shop-web
+  sessionAffinity: None
+  type: ClusterIP

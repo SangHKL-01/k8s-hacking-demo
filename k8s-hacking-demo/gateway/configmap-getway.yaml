@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-gateway
+  namespace: k8s-hacking
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: spring-gateway
+  template:
+    metadata:
+      labels:
+        app: spring-gateway
+    spec:
+      serviceAccountName: gateway-sa
+      containers:
+      - name: gateway
+        image: sanghkl01/spring-cloud-gateway:3.1.0
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8080
+        env:
+        # --- CẤU HÌNH FIX LỖI NHÂN ĐÔI HEADER ---
+        - name: JAVA_TOOL_OPTIONS
+          value: >-
+            -Dmanagement.endpoint.gateway.enabled=true
+            -Dmanagement.endpoints.web.exposure.include=*
+            -Dspring.cloud.gateway.x-forwarded.enabled=false
+            -Dspring.cloud.gateway.routes[0].id=shop-route
+            -Dspring.cloud.gateway.routes[0].uri=http://shop-web:8080
+            -Dspring.cloud.gateway.routes[0].predicates[0]=Path=/**
+            -Dspring.cloud.gateway.routes[0].filters[0]=PreserveHostHeader

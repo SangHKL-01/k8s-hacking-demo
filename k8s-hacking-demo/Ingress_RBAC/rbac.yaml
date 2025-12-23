@@ -1,0 +1,32 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: gateway-sa
+  namespace: k8s-hacking
+---
+# Tạo Role với quyền hạn đặc biệt (Blind Secret)
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: gateway-blind-role
+rules:
+  - apiGroups: [""]
+    resources: ["pods"]
+    verbs: ["get", "list"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    verbs: ["get"] # <--- Lưu ý: Không có "list" hay "watch"
+---
+# Gán quyền trên cho ServiceAccount của Gateway
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: gateway-blind-binding
+subjects:
+  - kind: ServiceAccount
+    name: gateway-sa
+    namespace: default
+roleRef:
+  kind: ClusterRole
+  name: gateway-blind-role
+  apiGroup: k8s-hacking
